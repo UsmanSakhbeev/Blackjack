@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class DeckScript : MonoBehaviour
+public class Deck : MonoBehaviour
 {
     private List<Card> cardsList = new();
     public Sprite[] cards;
 
     void Start()
     {
+        PrepareDeck();
+    }
+
+    public void PrepareDeck()
+    {
         CreateDeck();
         ShuffleDeck();
     }
-
-    public void CreateDeck()
+    
+    private void CreateDeck()
     {
 
         for (int i = 0; i < cards.Length; i++)
@@ -45,7 +50,7 @@ public class DeckScript : MonoBehaviour
         return card;
     }
 
-    public void ShuffleDeck()
+    private void ShuffleDeck()
     {
         int deckCount = cardsList.Count;
         for (int i = 0; i < 100; i++)

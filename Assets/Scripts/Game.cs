@@ -7,7 +7,7 @@ public class Game : MonoBehaviour
 {
     public GameObject cardPrefab;
     public GameObject endGameUI;
-    public DeckScript deckScript;
+    public Deck deckScript;
 
     public Text playerScore;
     public Text dealerScore;
@@ -59,7 +59,7 @@ public class Game : MonoBehaviour
 
     public void NewGame()
     {
-        deckScript.ShuffleDeck();
+        deckScript.PrepareDeck();
         PrepareTheTable();
         endGameUI.SetActive(false);
         _playerScore = 0;
@@ -70,13 +70,16 @@ public class Game : MonoBehaviour
     {
         var card = deckScript.GetCard();
 
-        _playerScore += card.value;
-        _playerCardCount++;
+        if(_playerScore<21)
+        {
+            _playerScore += card.value;
+            _playerCardCount++;
+            ShowPlayerCard(card);
+        }
 
-        ShowPlayerCard(card);
     }
 
-    public void ShowPlayerCard(DeckScript.Card card)
+    public void ShowPlayerCard(Deck.Card card)
     {
         cardPrefab.GetComponent<SpriteRenderer>().sprite = card.sprite;
         var newCard = Instantiate(cardPrefab, new Vector3(-3.75f + _playerCardCount * 1.6f, -2, 0), Quaternion.identity);
@@ -92,7 +95,7 @@ public class Game : MonoBehaviour
 
         ShowDealerCard(card);
     }
-    public void ShowDealerCard(DeckScript.Card card)
+    public void ShowDealerCard(Deck.Card card)
     {
         cardPrefab.GetComponent<SpriteRenderer>().sprite = card.sprite;
         var newCard = Instantiate(cardPrefab, new Vector3(-3.75f + _dealerCardCount * 1.6f, 1.5f, 0), Quaternion.identity);
