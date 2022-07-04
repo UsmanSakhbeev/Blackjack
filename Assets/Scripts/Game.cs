@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Game : MonoBehaviour
 {
     public GameObject cardPrefab;
+    public GameObject endGameUI;
     public DeckScript deckScript;
 
     public Text playerScore;
@@ -20,10 +21,12 @@ public class Game : MonoBehaviour
     private int _bet;
     private int _kredit;
 
+    private int Test;
     private List<GameObject> _cardsOnDeck = new();
 
     private void Start()
     {
+        endGameUI.SetActive(false);
         _playerScore = 0;
         _bet = 0;
         _kredit = 500;
@@ -32,10 +35,17 @@ public class Game : MonoBehaviour
     private void Update()
     {
         UpdateUI();
+        CashCheck();
     }
 
+    private void CashCheck()
+    {
+        if (_kredit <= 0 && _bet == 0)
+            endGameUI.SetActive(true);
+    }
     public void StartNewRound()
     {
+        
         if (_bet == 0)
         {
             _bet = 10;
@@ -45,6 +55,16 @@ public class Game : MonoBehaviour
         PlayerGetsCard();
         PlayerGetsCard();
         DealerGetsCard();
+    }
+
+    public void NewGame()
+    {
+        deckScript.ShuffleDeck();
+        PrepareTheTable();
+        endGameUI.SetActive(false);
+        _playerScore = 0;
+        _bet = 0;
+        _kredit = 500;
     }
     public void PlayerGetsCard()
     {

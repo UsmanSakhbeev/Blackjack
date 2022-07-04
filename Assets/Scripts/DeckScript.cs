@@ -31,7 +31,6 @@ public class DeckScript : MonoBehaviour
             }
             cardsList.Add(new Card(cards[i], currentNumber));
         }
-        Debug.Log(cardsList.Count);
     }
 
     public Card GetCard()

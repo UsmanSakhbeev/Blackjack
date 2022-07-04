@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public Button blueChipButton;
     public Button greenChipButton;
     public Button yellowChipButton;
+    public Button newGameButton;
 
-    public DeckScript deckScript;
     public Game game;
 
     private bool _isRoundEnded;
@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
         blueChipButton.onClick.AddListener(() => BlueChipClicked());
         greenChipButton.onClick.AddListener(() => GreenChipClicked());
         yellowChipButton.onClick.AddListener(() => YellowChipClicked());
+
+        newGameButton.onClick.AddListener(() => NewGameClicked());
 
         standButton.gameObject.SetActive(false);
         hitButton.gameObject.SetActive(false);
@@ -103,7 +105,7 @@ public class GameManager : MonoBehaviour
         game.DetermineTheWinner();
 
         _isRoundEnded = true;
-        NewRound();
+        NewRound(); 
     }
 
     private void RedChipClicked()
@@ -121,5 +123,10 @@ public class GameManager : MonoBehaviour
     private void YellowChipClicked()
     {
         game.PlaceBet(500);
+    }
+
+    public void NewGameClicked()
+    {
+        game.NewGame();        
     }
 }
