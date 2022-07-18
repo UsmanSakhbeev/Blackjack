@@ -7,7 +7,7 @@ public class Game : MonoBehaviour
 {
     public GameObject cardPrefab;
     public GameObject endGameUI;
-    public Deck deckScript;
+    public Deck deck;
 
     public Text playerScore;
     public Text dealerScore;
@@ -21,7 +21,6 @@ public class Game : MonoBehaviour
     private int _bet;
     private int _kredit;
 
-    private int Test;
     private List<GameObject> _cardsOnDeck = new();
 
     private void Start()
@@ -59,7 +58,7 @@ public class Game : MonoBehaviour
 
     public void NewGame()
     {
-        deckScript.PrepareDeck();
+        deck.PrepareDeck();
         PrepareTheTable();
         endGameUI.SetActive(false);
         _playerScore = 0;
@@ -68,7 +67,7 @@ public class Game : MonoBehaviour
     }
     public void PlayerGetsCard()
     {
-        var card = deckScript.GetCard();
+        var card = deck.GetCard();
 
         if(_playerScore<21)
         {
@@ -76,7 +75,6 @@ public class Game : MonoBehaviour
             _playerCardCount++;
             ShowPlayerCard(card);
         }
-
     }
 
     public void ShowPlayerCard(Deck.Card card)
@@ -88,7 +86,7 @@ public class Game : MonoBehaviour
 
     public void DealerGetsCard()
     {
-        var card = deckScript.GetCard();
+        var card = deck.GetCard();
 
         _dealerScore += card.value;
         _dealerCardCount++;
@@ -140,7 +138,7 @@ public class Game : MonoBehaviour
     public void DetermineTheWinner()
     {
         if (_playerScore == 21)
-            _kredit += Convert.ToInt32(_bet * 1.5);
+            _kredit += Convert.ToInt32(_bet * 2.5);
         else if (_playerScore == _dealerScore)
             _kredit += _bet;        
         if (_playerScore > _dealerScore && _playerScore < 21)

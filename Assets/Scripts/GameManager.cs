@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Button dealButton;
-    public Button standButton;
-    public Button hitButton;
-    public Button doubleButton;
-    public Button redChipButton;
-    public Button blueChipButton;
-    public Button greenChipButton;
-    public Button yellowChipButton;
-    public Button newGameButton;
+    [SerializeField] private Button dealButton;
+    [SerializeField] private Button standButton;
+    [SerializeField] private Button hitButton;
+    [SerializeField] private Button doubleButton;
+    [SerializeField] private Button redChipButton;
+    [SerializeField] private Button blueChipButton;
+    [SerializeField] private Button greenChipButton;
+    [SerializeField] private Button yellowChipButton;
+    [SerializeField] private Button newGameButton;
 
     public Game game;
 
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void NewRound()
+    private void StartNewRound()
     {
         standButton.gameObject.SetActive(false);
         hitButton.gameObject.SetActive(false);
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         game.DetermineTheWinner();
 
         _isRoundEnded = true;
-        NewRound();
+        StartNewRound();
     }
     private void HitClicked()
     {
@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         game.DetermineTheWinner();
 
         _isRoundEnded = true;
-        NewRound(); 
+        StartNewRound(); 
     }
 
     private void RedChipClicked()

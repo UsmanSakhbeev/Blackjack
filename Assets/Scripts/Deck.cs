@@ -21,7 +21,6 @@ public class Deck : MonoBehaviour
     
     private void CreateDeck()
     {
-
         for (int i = 0; i < cards.Length; i++)
         {
             var currentNumber = i % 13 + 1;
@@ -42,8 +41,7 @@ public class Deck : MonoBehaviour
     {
         if(cardsList.Count == 0)
         {
-            CreateDeck();
-            ShuffleDeck();
+            PrepareDeck();
         }
         var card = cardsList[cardsList.Count - 1];
         cardsList.Remove(card);
